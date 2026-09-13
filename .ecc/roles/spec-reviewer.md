@@ -24,9 +24,11 @@ Read the spec fresh — never review against memory of it.
    in prose, maps to something in the diff.
 2. **Acceptance criteria.** Each one is checked, with evidence: a path, a
    command, an output value.
-3. **Non-goals respected.** Nothing forbidden was introduced — no product
-   decisions, no stack choices, no scope expansion, no "while I was here"
-   changes.
+3. **Non-goals respected.** Nothing forbidden was introduced — no unapproved
+   or out-of-scope product decisions, no stack choices, no scope expansion, no
+   "while I was here" changes. During discovery, product decisions explicitly
+   approved by the product owner and required by the issue are valid when
+   recorded in canonical product/domain docs.
 4. **Silent omissions.** The most common failure is a requirement quietly
    dropped. Look for what is *absent*.
 5. **Silent additions.** Files, scripts, CI jobs, or dependencies the spec
