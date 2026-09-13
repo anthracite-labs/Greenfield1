@@ -42,15 +42,19 @@ result:   <PASS/FAIL — N cases behaved as asserted>
 ## Project memory and decisions
 
 - [ ] `docs/MEMORY.md` updated with this session's entry
-- [ ] ADR added in `docs/decisions/` (or: no durable decision was made)
+- [ ] ADR added in `docs/decisions/` (or: no durable technical/architecture
+      decision was made; product-discovery decisions were recorded in the
+      canonical product docs instead)
 
 ## Scope confirmation
 
-- [ ] No product requirements introduced
+- [ ] No unapproved product requirements introduced; discovery changes are
+      product-owner approved and recorded in canonical product documentation
 - [ ] No framework, database, auth, hosting, or UI choice introduced
 - [ ] No application source code added (or the ADR that permits it is linked)
-- [ ] `config/project.env` unchanged — or the lifecycle transition is explicit,
-      ADR-backed, and is the only thing this PR changes
+- [ ] Lifecycle values in `config/project.env` are unchanged — or the lifecycle
+      transition is explicit, ADR-backed, and is the only substantive state
+      change in this PR
 - [ ] No guard was weakened or disabled to make this change fit
 - [ ] No GitHub administrative setting was changed by a script
 - [ ] The ECC adapter is described as an adaptation, not native ECC
