@@ -18,13 +18,22 @@ At present this repository is in **discovery**:
 - `ALLOW_APP_STACK=0`
 - `STACK_DECISION_ADR=`
 
-That means product discovery and foundation work are in scope, while application
-frameworks, databases, auth schemes, hosting targets, UI stacks, and other
-application-stack decisions remain gated until the reviewed lifecycle transition
-and accepted stack ADR required by `config/project.env`.
+That means founder-approved product discovery and foundation work are in scope,
+while application frameworks, databases, auth schemes, hosting targets, UI
+stacks, and other application-stack decisions remain gated until discovery exits
+and the later reviewed architecture/lifecycle process permits them.
 
-The active product-discovery record is GitHub Issue #1. Repository documentation
-must not silently substitute an implementation decision for that discovery work.
+Canonical discovery state lives in:
+
+- [`docs/PRODUCT.md`](docs/PRODUCT.md) — working product definition, product-layer contracts, constraints, research register, open discovery and validation requirements;
+- [`docs/DOMAIN.md`](docs/DOMAIN.md) — provisional product vocabulary, ownership classes and invariants;
+- [`docs/ROADMAP.md`](docs/ROADMAP.md) — lifecycle sequencing and discovery progress;
+- [`docs/SECURITY.md`](docs/SECURITY.md) — repository security plus product security/privacy discovery requirements;
+- [`docs/MEMORY.md`](docs/MEMORY.md) — append-only session history, not the product specification.
+
+GitHub Issue #1 remains the discovery discussion/provenance record. Current
+requirements should be read from the reviewed canonical docs rather than from an
+ad-hoc parallel register.
 
 **Foundation version:** see [`FOUNDATION_VERSION`](FOUNDATION_VERSION) — `0.1.0`.
 
@@ -33,11 +42,11 @@ must not silently substitute an implementation decision for that discovery work.
 | | |
 | :-- | :-- |
 | **ECC-on-Arena adapter** | Engineering rules, 10 on-demand workflows, 3 review personas, adapted from ECC v2.2.0 (MIT), fully attributed. Not native ECC. |
-| **Deterministic gate** | `scripts/verify.sh` — 17 committed checks, non-zero on failure, re-run independently in CI. |
+| **Deterministic gate** | `scripts/verify.sh` — committed checks, non-zero on failure, re-run independently in CI. |
 | **Negative tests** | `scripts/selftest.sh` — injects faults into a throwaway copy and asserts the gate rejects each one. A gate that only ever passes proves nothing. |
 | **Lifecycle state** | `config/project.env` — factory → discovery → architecture → implementation, with a no-stack guard that stands down only via a reviewed, ADR-backed transition. |
 | **Portable governance** | `config/main-ruleset.json` — a branch-protection payload with no instance ids, applicable to a repository by a human administrator. |
-| **Documentation set** | Product, domain, roadmap, architecture, security, memory, and factory docs that are filled as the project lifecycle advances. |
+| **Canonical documentation** | Product, domain, roadmap, architecture, security, memory, and factory docs are filled as the project lifecycle advances. |
 
 ## Operating model
 
@@ -63,7 +72,7 @@ Arena auto-loads nothing. One short instruction is enough:
 > inspect project memory and the skill index, then work GitHub Issue #X. Load
 > only skills relevant to that issue.
 
-Or print the same briefing:
+Or print the same briefing from the shell:
 
 ```bash
 bash scripts/bootstrap.sh
@@ -72,6 +81,8 @@ bash scripts/bootstrap.sh
 Startup context is deliberately small: the bootstrap protocol, the standing
 engineering rules, the skill index, project memory, and the lifecycle config.
 Workflows are loaded one or two at a time, only when the task calls for them.
+For product work, the bootstrap protocol directs the session to the relevant
+canonical product docs rather than a separate master register.
 
 ## Foundation provenance
 
@@ -94,7 +105,12 @@ FOUNDATION_VERSION         App-Factory foundation version (0.1.0)
 .ecc/                      the ECC-on-Arena adapter (rules, skills, roles, provenance)
 config/project.env         authoritative lifecycle phase and application-stack guard
 config/main-ruleset.json   portable branch-protection template
-docs/                      product, domain, architecture, roadmap, security, memory, factory
+docs/PRODUCT.md            canonical product discovery
+docs/DOMAIN.md             provisional domain vocabulary and invariants
+docs/ROADMAP.md            lifecycle sequencing and discovery progress
+docs/SECURITY.md           security policy + product security/privacy discovery requirements
+docs/MEMORY.md             append-only session memory
+docs/ARCHITECTURE.md       engineering foundation; application architecture not authorized yet
 docs/decisions/            architecture decision records
 scripts/                   verify, selftest, bootstrap, init-project, sync-ecc
 .github/workflows/verify.yml   independent CI execution of the same gate

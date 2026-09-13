@@ -2,12 +2,19 @@
 
 This repository is built on **App-Factory**, a generic, reusable ECC-on-Arena
 engineering foundation. The foundation defines *how* work is done; it defines
-no product, framework, database, auth scheme, hosting target, or UI. Those are
-per-project decisions, recorded as ADRs, and gated by explicit repository
-state.
+no product, framework, database, auth scheme, hosting target, or UI for a newly
+instantiated project. Product requirements are discovered and recorded in the
+project's canonical product docs; implementation choices are made later through
+architecture issues/ADRs and gated by explicit repository state.
 
 Check [`config/project.env`](config/project.env) before assuming anything:
 `PROJECT_PHASE` is the authoritative answer to "what is this repository?".
+
+During `discovery`, treat reviewed canonical product documents — especially
+[`docs/PRODUCT.md`](docs/PRODUCT.md), [`docs/DOMAIN.md`](docs/DOMAIN.md),
+[`docs/ROADMAP.md`](docs/ROADMAP.md), and [`docs/SECURITY.md`](docs/SECURITY.md)
+— as the current working product truth. Do not invent requirements beyond them.
+Discovery does not authorize an application stack.
 
 ## What this repository contains
 
@@ -52,9 +59,12 @@ FOUNDATION_VERSION         App-Factory foundation version of this repository
 .ecc/UPSTREAM.md           provenance, licence, curation, sync policy
 config/project.env         lifecycle state: phase and the no-stack guard
 config/main-ruleset.json   portable branch-protection template (applied by a human)
-docs/                      product/architecture/domain/roadmap/security skeletons
-docs/FACTORY.md            how to instantiate a new application repository
+docs/PRODUCT.md            canonical product discovery / product definition
+docs/DOMAIN.md             provisional product-domain vocabulary and invariants
+docs/ROADMAP.md            lifecycle sequencing and discovery progress
+docs/SECURITY.md           repository security plus product security/privacy requirements
 docs/MEMORY.md             append-only project memory — read and extend it
+docs/FACTORY.md            how to instantiate a new application repository
 docs/decisions/            architecture decision records
 scripts/verify.sh          authoritative verification gate (non-zero on failure)
 scripts/selftest.sh        negative tests — proves the gate can fail
@@ -93,8 +103,11 @@ none.
 2. Never report an unverified change as done; state what you could not check.
 3. Never commit secrets — `verify.sh` scans the tree for them and reports
    findings redacted.
-4. Never introduce an application stack or product decision without an approved
-   issue, an ADR, and the matching transition in `config/project.env`.
+4. Never invent product requirements. During discovery, product decisions require
+   product-owner approval and reviewed canonical documentation. Never introduce
+   an application stack, database, auth scheme, hosting target, or UI stack
+   without an approved architecture issue, an accepted ADR, and the matching
+   transition in `config/project.env`.
 5. Never disable a guard to make a change fit.
 6. Never perform GitHub administration from a script or without explicit human
    authorization.

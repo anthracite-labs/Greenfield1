@@ -131,3 +131,34 @@ closed or superseded.
 **Next:** After this documentation alignment is reviewed and merged, continue
 App1 discovery from the next unresolved product layer; do not select an
 application stack while `ALLOW_APP_STACK=0`.
+
+## 2026-09-13 — Discovery register normalized into canonical docs
+
+**Context:** Issue #6, branch `docs/issue-6-normalize-discovery-docs`.
+**Did:** Moved the founder-approved working discovery state out of the temporary
+root discovery register and into the canonical repository surfaces:
+`docs/PRODUCT.md`, `docs/DOMAIN.md`, `docs/ROADMAP.md`, and `docs/SECURITY.md`.
+Updated the repository/bootstrap guidance so `discovery` means product definition
+is in progress and founder-approved working requirements may exist, while
+application architecture/stack remains prohibited. The temporary root discovery
+register is retired after content/reference review confirms its accepted
+discovery material is preserved.
+**Verified:** In this connector session, the source discovery register was read
+in full in line-range chunks; branch writes were made only on the Issue #6
+branch; the canonical documents were re-read during review; `config/project.env`
+was not edited and remains `PROJECT_PHASE=discovery`, `ALLOW_APP_STACK=0`, with
+an empty `STACK_DECISION_ADR`. Local shell verification is not claimed here; the
+exact PR head and GitHub Actions are the independent acceptance evidence.
+**Learned:** The foundation's original shorthand "discovery = no product
+definition" was too absolute once founder-approved discovery existed. The
+correct distinction is: discovery may contain an approved **working** product
+definition, but architecture begins only when that definition is accepted enough
+to choose implementation approaches. Also, the older operating-conventions row
+above that groups "stack/product choice" under ADRs is historical foundation
+wording; this entry supersedes that interpretation for Greenfield1 product
+discovery. Product decisions belong in reviewed canonical product docs;
+application-stack decisions belong in ADRs during the later lifecycle.
+**Next:** Continue product discovery from Hybrid / Professional Workspace using
+`docs/PRODUCT.md` as the canonical discovery source, Issue #1 as provenance, and
+the Research → Planning workflow. Do not advance to architecture until the
+remaining discovery and validation exit conditions are explicitly satisfied.

@@ -119,3 +119,194 @@ a public issue for an unpatched exposure.
 
 If a credential is ever committed, treat it as burned: **rotate it first**,
 then remove it. Deleting a line does not remove it from history.
+
+---
+
+## App1 product security and privacy discovery requirements
+
+**Status:** discovery requirements, not implementation claims.  
+**Lifecycle:** `PROJECT_PHASE=discovery`.
+
+The foundation policy above remains in force unchanged. The requirements below
+come from current product discovery in [PRODUCT.md](PRODUCT.md) and constrain
+later architecture and validation. Specific cryptographic standards, protocols,
+identity providers, authorization systems, storage mechanisms, and deployment
+technologies remain architecture decisions.
+
+### 1. Claims must be demonstrated before marketing
+
+> **Never market a privacy/security property before it is technically demonstrated and verified.**
+
+E2EE, relay confidentiality, metadata claims, self-hosting properties,
+data-residency promises, and similar claims must be validated against the actual
+later implementation before they are stated as guarantees.
+
+### 2. Data and infrastructure control
+
+Long-term product goals include direct/customer-controlled paths where suitable
+and organizational control, as practical, over:
+
+- identity;
+- policy;
+- media infrastructure;
+- storage;
+- encryption;
+- geographic/data placement.
+
+Self-hosted, dedicated managed, and BYOC models remain first-class product
+directions. These requirements do not select an implementation mechanism.
+
+### 3. Protected media and E2EE direction
+
+Discovery direction includes:
+
+- E2EE where applicable;
+- relays unable to read protected media where the eventual cryptographic model
+  provides this;
+- direct/customer-controlled paths where suitable.
+
+No cryptographic protocol or standard is approved during discovery.
+
+### 4. Source-owned data and permissions
+
+For live integrations and external objects:
+
+> **The source system remains authoritative for its own data and permissions.**
+
+App1 must not create a shadow ACL universe that silently grants access to
+content a user cannot access at the source.
+
+Where live integration can preserve source ownership, permissions, and data
+residency, migration/copying into App1 should not be required.
+
+### 5. Identity and contact discovery
+
+Current discovery direction:
+
+- App1 has an internal identity with optional external identifiers;
+- phone number is **not mandatory**;
+- contact discovery is privacy-first;
+- exact username, QR, and invite links are preferred default discovery
+  mechanisms;
+- mandatory address-book upload is rejected;
+- opt-in private contact discovery may be researched later.
+
+Phone-number recovery/discovery and abuse trade-offs remain open research
+questions.
+
+### 6. Presence, receipts and notification privacy
+
+Presence should expose minimal information by default and remain
+user-controlled. Read receipts and typing indicators should be privacy
+configurable.
+
+Notifications should use privacy-aware previews and user-controlled quiet
+modes.
+
+### 7. Search, indexing and connected content
+
+Search should avoid assuming that App1 centrally indexes all user/company
+content.
+
+Current direction includes:
+
+- device/local search where practical;
+- optional remote/BYOC indexing;
+- source-specific search for integrations;
+- workspace search across connected external objects only while respecting
+  source permissions.
+
+Broad centralized indexing is treated as both a privacy/security surface and a
+known recurring-cost surface.
+
+### 8. Backup, persistence and storage
+
+App1 should not require mandatory App1 cloud storage.
+
+Current backup/persistence directions include:
+
+- local/export;
+- user-selected cloud/BYOC;
+- customer-owned persistence;
+- App1-managed persistence/backup only when deliberately chosen and
+  economically justified.
+
+Persistent workspace context must not imply that all workspace bytes are copied
+into App1.
+
+### 9. Remote control and high-risk interaction
+
+Remote control is not a Universal Core default. If/when introduced in
+Hybrid/Enterprise or a paid consumer capability, it requires explicit consent
+and strong safety controls.
+
+The concrete authorization, session-isolation, confirmation and revocation
+mechanisms remain future discovery/architecture work.
+
+### 10. Abuse and unauthenticated use
+
+Current discovery uses account-based onboarding and does not include
+unauthenticated calling as an initial default because of abuse risk.
+
+Abuse controls are still part of the open validation plan and must be tested
+rather than assumed sufficient.
+
+### 11. Enterprise security direction
+
+Enterprise discovery still needs detailed definition for:
+
+- identity integration;
+- SSO/SCIM;
+- policy controls;
+- audit controls;
+- retention;
+- compliance;
+- data residency;
+- federation;
+- self-hosting;
+- dedicated managed infrastructure;
+- BYOC;
+- customer AI/models;
+- admin UX;
+- multi-region/HA requirements.
+
+None of these are implementation-approved yet.
+
+### 12. AI/model data boundaries
+
+AI is not mandatory in Universal Core.
+
+Long-term research includes local/on-device models, customer-hosted models,
+customer cloud/model providers, enterprise model gateways, and App1-managed
+paid AI.
+
+Product constraint:
+
+> **Do not make every App1 interaction create a vendor AI inference bill or require proprietary data to move into App1-managed AI infrastructure.**
+
+For enterprises, BYO-model/customer-approved AI is a first-class research path.
+
+### 13. Security-relevant economic surfaces
+
+The following are treated as security/privacy and recurring-cost surfaces until
+proven otherwise:
+
+- centralized media;
+- persistent vendor storage;
+- broad indexing;
+- recording/transcoding;
+- transcription;
+- AI inference;
+- PSTN/SMS/phone verification;
+- continuous synchronization;
+- large-scale automated moderation;
+- managed infrastructure.
+
+Cost pressure must not silently weaken privacy, access control, reliability, or
+security requirements.
+
+## Related product-discovery documents
+
+- [PRODUCT.md](PRODUCT.md) — canonical product discovery and product constraints
+- [DOMAIN.md](DOMAIN.md) — source-authority and domain invariants
+- [ROADMAP.md](ROADMAP.md) — lifecycle state and discovery exit conditions
