@@ -62,10 +62,10 @@ case "$phase" in
     line "note:       this is the App-Factory template itself — foundation work only."
     ;;
   discovery)
-    line "note:       no product definition yet. Do not invent one; see docs/PRODUCT.md."
+    line "note:       product discovery is in progress. Use reviewed canonical docs; do not invent beyond them or select a stack."
     ;;
   architecture)
-    line "note:       product defined, stack being decided. Record it as an ADR."
+    line "note:       product definition accepted for architecture; stack being decided via ADR."
     ;;
   implementation)
     line "note:       stack recorded in $(config_value STACK_DECISION_ADR)."
