@@ -1,18 +1,34 @@
-# App-Factory
+# Greenfield1 — App1
 
-A reusable, product-agnostic engineering foundation for building applications
-with **Arena Agent Mode** under **ECC** discipline and **ChatGPT** review.
+Greenfield1 is the repository for **App1**, instantiated from the reusable
+**App-Factory** engineering foundation. The foundation supplies the engineering
+protocol and lifecycle guards; App1 supplies the product work as it advances
+through the repository-controlled lifecycle.
 
 > **ECC is repository-owned, Arena-executed, ChatGPT-supervised.**
 
+## Current project state
+
+The authoritative lifecycle state is [`config/project.env`](config/project.env).
+At present this repository is in **discovery**:
+
+- `PROJECT_NAME=App1`
+- `PROJECT_SLUG=app1`
+- `PROJECT_PHASE=discovery`
+- `ALLOW_APP_STACK=0`
+- `STACK_DECISION_ADR=`
+
+That means product discovery and foundation work are in scope, while application
+frameworks, databases, auth schemes, hosting targets, UI stacks, and other
+application-stack decisions remain gated until the reviewed lifecycle transition
+and accepted stack ADR required by `config/project.env`.
+
+The active product-discovery record is GitHub Issue #1. Repository documentation
+must not silently substitute an implementation decision for that discovery work.
+
 **Foundation version:** see [`FOUNDATION_VERSION`](FOUNDATION_VERSION) — `0.1.0`.
 
-This repository is the reusable template source. It contains **no application**:
-no framework, no database, no auth scheme, no hosting target, no UI, and no
-product definition. That is the point. What it ships is the machinery that makes
-those decisions disciplined when they are eventually made.
-
-## What you get
+## What the foundation provides
 
 | | |
 | :-- | :-- |
@@ -20,8 +36,8 @@ those decisions disciplined when they are eventually made.
 | **Deterministic gate** | `scripts/verify.sh` — 17 committed checks, non-zero on failure, re-run independently in CI. |
 | **Negative tests** | `scripts/selftest.sh` — injects faults into a throwaway copy and asserts the gate rejects each one. A gate that only ever passes proves nothing. |
 | **Lifecycle state** | `config/project.env` — factory → discovery → architecture → implementation, with a no-stack guard that stands down only via a reviewed, ADR-backed transition. |
-| **Portable governance** | `config/main-ruleset.json` — a branch-protection payload with no instance ids, applicable to any new repository. |
-| **Clean documentation set** | Product, domain, roadmap, architecture, security, memory, and factory docs that start empty on purpose. |
+| **Portable governance** | `config/main-ruleset.json` — a branch-protection payload with no instance ids, applicable to a repository by a human administrator. |
+| **Documentation set** | Product, domain, roadmap, architecture, security, memory, and factory docs that are filled as the project lifecycle advances. |
 
 ## Operating model
 
@@ -57,27 +73,18 @@ Startup context is deliberately small: the bootstrap protocol, the standing
 engineering rules, the skill index, project memory, and the lifecycle config.
 Workflows are loaded one or two at a time, only when the task calls for them.
 
-## Creating a new application from this foundation
+## Foundation provenance
 
-Read [`docs/FACTORY.md`](docs/FACTORY.md) — it is the authoritative checklist.
-Before expecting GitHub's **Use this template** action, confirm that this source
-repository is administratively marked as a **Template repository**. That GitHub
-setting is not represented by committed files; if it is not enabled, use the
-copy fallback documented in `docs/FACTORY.md` rather than treating the repository
-contents as proof that template mode is active.
+This repository retains the App-Factory machinery and documentation needed to
+operate the project safely. [`docs/FACTORY.md`](docs/FACTORY.md) documents the
+source foundation and how new repositories are instantiated; it is provenance
+and operational reference here, not evidence that Greenfield1 itself is the
+reusable template source.
 
-The short version after the new repository exists:
-
-```bash
-bash scripts/init-project.sh --name "<Project Name>"   # non-destructive; does not commit
-bash scripts/verify.sh
-bash scripts/selftest.sh
-```
-
-> **A template repository copies files, not GitHub configuration.** Visibility,
-> branch rulesets, GitHub App installations, Actions permissions, secrets, and
-> required checks are **not** inherited and must be set up by a human. No
-> script here performs repository administration.
+A template repository copies files, not GitHub configuration. Visibility,
+branch rulesets, GitHub App installations, Actions permissions, secrets, and
+required checks are administrative state and are not proven merely by committed
+files.
 
 ## Repository map
 
@@ -85,7 +92,7 @@ bash scripts/selftest.sh
 AGENTS.md                  engineering entry point for agents and humans
 FOUNDATION_VERSION         App-Factory foundation version (0.1.0)
 .ecc/                      the ECC-on-Arena adapter (rules, skills, roles, provenance)
-config/project.env         lifecycle phase and the application-stack guard
+config/project.env         authoritative lifecycle phase and application-stack guard
 config/main-ruleset.json   portable branch-protection template
 docs/                      product, domain, architecture, roadmap, security, memory, factory
 docs/decisions/            architecture decision records
@@ -118,6 +125,6 @@ the workflow and the ruleset ever disagree.
   the ECC runtime is claimed.
 - **Factory provenance:** App-Factory v0.1.0 was derived from the reviewed
   source foundation
-  `anthracite-labs/Ditto@5d9cc349d264f73e8da913da9d2cea664522237d`. Generated
-  repositories identify themselves by `FOUNDATION_VERSION` and inherit none of
-  that project's history.
+  `anthracite-labs/Ditto@5d9cc349d264f73e8da913da9d2cea664522237d`. Greenfield1
+  identifies its inherited foundation through `FOUNDATION_VERSION`; the source
+  project's product history is not part of this repository.
