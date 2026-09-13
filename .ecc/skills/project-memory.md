@@ -16,8 +16,9 @@ surprise, a failed approach, or a hard-won environment fact.
 | File | Purpose | Cadence |
 | :-- | :-- | :-- |
 | `docs/MEMORY.md` | Append-only session ledger: what was done, verified, learned | Every session |
-| `docs/decisions/` | ADRs for durable trade-offs (`.ecc/skills/decisions.md`) | When a real decision is made |
-| `docs/ARCHITECTURE.md` | Current structure and boundaries | When structure changes |
+| `docs/PRODUCT.md`, `docs/DOMAIN.md` | Canonical reviewed product-discovery requirements and domain rules | When product discovery changes |
+| `docs/decisions/` | ADRs for durable technical/architecture trade-offs (`.ecc/skills/decisions.md`) | When a real technical decision is made |
+| `docs/ARCHITECTURE.md` | Current engineering/application structure and boundaries | When structure changes |
 | `docs/codemaps/` | Token-lean maps of code areas | When application code exists |
 | `docs/ARENA.md` | Harness/environment expectations | When a capability is re-verified |
 
@@ -31,8 +32,10 @@ surprise, a failed approach, or a hard-won environment fact.
    repeating your dead end. One line each, with the reason it failed.
 4. **Record verification, not intent.** The command run and the value it
    returned — not "tests should pass".
-5. **Promote durable decisions** into an ADR. Memory is a ledger; ADRs are the
-   reasoning that outlives it.
+5. **Promote durable knowledge to the correct canonical surface.** Product
+   discovery belongs in reviewed product/domain docs and its approved issue
+   provenance; durable technical/architecture trade-offs belong in ADRs.
+   Memory is the session ledger, not the policy/specification layer.
 6. **Update structure docs** if the repository shape changed.
 7. **Commit it with the work.** Memory pushed in a separate commit that never
    happens is memory lost.
@@ -57,8 +60,12 @@ surprise, a failed approach, or a hard-won environment fact.
   mark inferences `[INFERRED]`.
 - Do not duplicate the PR description. Memory records what a future session
   needs; the PR records what a reviewer needs.
+- Do not use memory or an ADR as a substitute for canonical product docs during
+  discovery.
 
 ## Done when
 
 `docs/MEMORY.md` carries today's entry, committed and pushed on the session
-branch, and any durable decision has an ADR.
+branch, and any durable knowledge has been promoted to the correct canonical
+surface: product/domain docs for discovery decisions, ADRs for durable
+technical/architecture trade-offs.
