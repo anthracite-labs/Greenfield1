@@ -49,13 +49,13 @@ Grant it deliberately, or edit workflows by hand.
 Apply [`../config/main-ruleset.json`](../config/main-ruleset.json) to the
 default branch.
 
-The file is **exactly the documented request body** for GitHub's "Create
-repository ruleset" endpoint and nothing else — no instance ids, no export
-metadata, and no explanatory keys. That is deliberate: a payload that is
-applied verbatim must not contain fields the API does not document, so all
-human explanation lives in this page rather than inside the JSON.
-`scripts/verify.sh` (check `ruleset`) parses it and validates its *structure*,
-rejecting unknown top-level keys as well as missing policy.
+The file is the portable request body for GitHub's repository-ruleset API. It
+contains no server-assigned ids, timestamps, source metadata, or explanatory
+keys. The committed payload should be kept in sync with the active repository
+policy, while the live GitHub ruleset remains the authoritative evidence that
+protection is actually applied. `scripts/verify.sh` (check `ruleset`) parses the
+portable file and validates its structure, rejecting unknown top-level keys as
+well as missing policy.
 
 Either configure it through the GitHub UI to match, or have an **explicitly
 authorized** maintainer apply it with admin credentials, for example:
@@ -73,11 +73,28 @@ Validate the file's shape first — this is read-only and safe:
 bash scripts/verify.sh --only=ruleset
 ```
 
-The ruleset encodes: pull request required, 0 mandatory human approvals (the
-solo-owner workflow, where ChatGPT is the independent reviewer), review-thread
-resolution required, strict/up-to-date required status checks
-`Foundation gate` and `Independent checks`, no force pushes, no branch
-deletion, and no bypass actors.
+The current portable policy encodes:
+
+- pull requests required for the default branch;
+- baseline `required_approving_review_count=0` for the solo-owner workflow;
+- stale approvals dismissed on new reviewable pushes;
+- no required code-owner review;
+- no general last-push approval requirement;
+- no required-reviewer teams (`required_reviewers=[]`);
+- all review threads resolved before merge;
+- GitHub's `require_extra_approval_for_unattributed_changes` flag explicitly
+  enabled so the portable payload matches the active ruleset;
+- merge, squash, and rebase allowed;
+- strict/up-to-date required status checks `Foundation gate` and
+  `Independent checks`;
+- required checks enforced on branch creation as well as later updates;
+- no force pushes, no branch deletion, and no bypass actors.
+
+GitHub currently documents the unattributed-change approval setting as a
+public-preview Copilot rule and states that it has no effect when the baseline
+required approval count is zero. It is nevertheless recorded explicitly here
+because silent platform defaults are poor portable policy: a future baseline
+approval change should not accidentally change the meaning of an omitted field.
 
 > The required contexts must match the job names in
 > `.github/workflows/verify.yml` exactly. If you rename a CI job, the ruleset
@@ -96,6 +113,11 @@ gh api repos/<owner>/<repo>/rules/branches/main --jq '[.[].type]'
 The second command must list `pull_request`, `required_status_checks`,
 `deletion`, and `non_fast_forward`. An empty list means `main` is unprotected
 and the PR-only workflow is enforced by nothing but convention.
+
+For a complete ruleset comparison, also inspect the active repository ruleset
+and compare its reusable fields with `config/main-ruleset.json`; do not copy
+server-assigned ids, timestamps, links, source metadata, or bypass-evaluation
+state back into the portable payload.
 
 ### 7. Run `scripts/init-project.sh`
 
@@ -122,16 +144,18 @@ first — a broken gate means every later claim is unverified.
 
 ### 9. Begin product discovery via a GitHub issue
 
-Answer the questions in [PRODUCT.md](PRODUCT.md) in an issue, then land the
-definition in a reviewed PR. Do not let a product definition arrive as a side
-effect of code.
+In a newly generated repository, open a product-discovery issue and use that
+project's `docs/PRODUCT.md` as the canonical reviewed product document. Do not
+let a product definition arrive as a side effect of code.
 
-### 10. Keep ChatGPT independent review before merge
+### 10. Keep independent review before merge
 
-The foundation assumes 0 required human approvals precisely because an
-independent reviewer reads the real diff before merge. Removing that step
-removes the only human check in the loop. Never merge your own agent-authored
-PR unreviewed.
+The foundation uses a baseline of 0 mandatory GitHub approvals so a solo owner
+is not structurally blocked from merging after the deterministic gates pass.
+That does **not** make review optional: ChatGPT still reviews the real diff
+independently before merge, and review findings must be addressed or recorded.
+The GitHub ruleset and the ChatGPT review process are complementary controls;
+neither should be described as proof that the other happened.
 
 ## Recording the application-stack decision
 
