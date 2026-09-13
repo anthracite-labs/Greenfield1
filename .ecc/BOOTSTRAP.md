@@ -138,7 +138,7 @@ sessions.
    with the issue reference (`Closes #N`), verification output, and known
    limitations.
 6. Leave the PR open. ChatGPT reviews the real diff independently; do not merge
-   your own work unless an explicitly authorized human directs the merge after review.
+   your own work.
 
 ---
 
