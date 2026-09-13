@@ -105,3 +105,29 @@ before relying on **Use this template**, and separately decide whether to apply
 the portable Main ruleset to App-Factory itself. Generated repositories must
 still receive their own live governance because GitHub administrative settings
 are not inherited.
+
+## 2026-09-13 — App1 discovery state aligned
+
+**Context:** Issue #4, branch `docs/issue-4-repository-state-alignment`.
+**Did:** Corrected the root README so Greenfield1 is described as the App1
+project repository instantiated from App-Factory rather than as the reusable
+factory source. Recorded the current lifecycle and added this durable pointer to
+GitHub Issue #1, which remains the active product-discovery record. Issue #1
+contains the current founder-approved discovery direction, including the
+Universal Core and Community / Personal Workspace contracts; later approved
+entries supersede conflicting earlier discovery assumptions.
+**Verified:** GitHub file reads in this session showed
+`config/project.env` with `PROJECT_NAME=App1`, `PROJECT_PHASE=discovery`,
+`ALLOW_APP_STACK=0`, and an empty `STACK_DECISION_ADR`; GitHub Issue #1 remained
+open as `Product discovery: define App1`; the branch reads of `README.md` and
+`docs/MEMORY.md` were used as the source for this documentation-only update.
+No shell verification is claimed here; PR CI is the acceptance evidence for
+these repository edits.
+**Learned:** Repository instantiation and later lifecycle transitions can leave
+human-facing factory wording stale even when `config/project.env` is correct.
+Future sessions should treat `config/project.env` as authoritative for lifecycle
+state and Issue #1 as the current discovery source until discovery is formally
+closed or superseded.
+**Next:** After this documentation alignment is reviewed and merged, continue
+App1 discovery from the next unresolved product layer; do not select an
+application stack while `ALLOW_APP_STACK=0`.
