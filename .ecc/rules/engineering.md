@@ -26,7 +26,9 @@ in one line — in the plan, the commit body, or the PR description.
 4. **Review before commit.** Every diff gets a code review pass; security
    triggers get a security pass (`.ecc/rules/security.md`).
 5. **Verify before claiming done.** `bash scripts/verify.sh` must exit 0.
-6. **Record what mattered.** `docs/MEMORY.md` plus ADRs for real decisions.
+6. **Record what mattered in the right place.** `docs/MEMORY.md` is the session
+   ledger; founder-approved product discovery belongs in canonical product/domain
+   docs; durable technical/architecture trade-offs belong in ADRs.
 7. **One PR per issue.** The PR body states what was verified and what was not.
 
 ## Honesty rules
