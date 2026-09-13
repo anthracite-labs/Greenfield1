@@ -136,18 +136,19 @@ application stack while `ALLOW_APP_STACK=0`.
 
 **Context:** Issue #6, branch `docs/issue-6-normalize-discovery-docs`.
 **Did:** Moved the founder-approved working discovery state out of the temporary
-root `MASTER.md` register and into the canonical repository surfaces:
+root discovery register and into the canonical repository surfaces:
 `docs/PRODUCT.md`, `docs/DOMAIN.md`, `docs/ROADMAP.md`, and `docs/SECURITY.md`.
 Updated the repository/bootstrap guidance so `discovery` means product definition
 is in progress and founder-approved working requirements may exist, while
-application architecture/stack remains prohibited. `MASTER.md` is retired after
-content/reference review confirms its accepted discovery material is preserved.
-**Verified:** In this connector session, source `MASTER.md` was read in full in
-line-range chunks; branch writes were made only on the Issue #6 branch; the
-canonical documents were re-read during review; `config/project.env` was not
-edited and remains `PROJECT_PHASE=discovery`, `ALLOW_APP_STACK=0`, with an empty
-`STACK_DECISION_ADR`. Local shell verification is not claimed here; the exact PR
-head and GitHub Actions are the independent acceptance evidence.
+application architecture/stack remains prohibited. The temporary root discovery
+register is retired after content/reference review confirms its accepted
+discovery material is preserved.
+**Verified:** In this connector session, the source discovery register was read
+in full in line-range chunks; branch writes were made only on the Issue #6
+branch; the canonical documents were re-read during review; `config/project.env`
+was not edited and remains `PROJECT_PHASE=discovery`, `ALLOW_APP_STACK=0`, with
+an empty `STACK_DECISION_ADR`. Local shell verification is not claimed here; the
+exact PR head and GitHub Actions are the independent acceptance evidence.
 **Learned:** The foundation's original shorthand "discovery = no product
 definition" was too absolute once founder-approved discovery existed. The
 correct distinction is: discovery may contain an approved **working** product
