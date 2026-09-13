@@ -31,8 +31,11 @@ that was asked for?"*. They fail independently, so they are run separately.
 
    Every verdict needs evidence — a path, a command, an output value. "Done"
    is not evidence.
-4. **Check the non-goals.** Confirm nothing forbidden was introduced: no
-   product decisions, no stack choices, no scope expansion.
+4. **Check the non-goals.** Confirm nothing forbidden or out of scope was
+   introduced: no unapproved product decisions, no stack choices, no silent
+   scope expansion. During discovery, product decisions explicitly approved by
+   the product owner and required by the issue belong in canonical product docs;
+   they are not automatically a spec violation.
 5. **Check the deltas the spec never mentioned** — new files, new scripts, new
    CI jobs. Each needs a justification line.
 6. **Report gaps honestly.** A PARTIAL row with a stated reason is fine. A
