@@ -50,6 +50,10 @@ Verification: <how correctness is proven>
 - Argue from the actual diff and real file paths, not from a general theory of
   good architecture.
 - Prefer deleting a layer over adding one.
-- Do not introduce an application stack, database, or framework here: that is
-  a product decision requiring an approved issue and its own ADR.
-- Record accepted trade-offs as ADRs (`../skills/decisions.md`).
+- Do not introduce an application stack, database, or framework before the
+  architecture lifecycle permits it: those are technical/architecture choices
+  requiring an approved architecture issue, an accepted ADR, and the matching
+  lifecycle transition.
+- Record accepted technical/architecture trade-offs as ADRs
+  (`../skills/decisions.md`). Product-discovery decisions belong in canonical
+  product/domain docs instead.

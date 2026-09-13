@@ -1,8 +1,16 @@
 # Architecture Decision Records
 
-Durable trade-offs, recorded so future sessions can reconstruct *why* instead of
-re-litigating it. Procedure:
+Durable technical and architectural trade-offs, recorded so future sessions can
+reconstruct *why* instead of re-litigating them. Procedure:
 [`.ecc/skills/decisions.md`](../../.ecc/skills/decisions.md).
+
+Founder-approved product-discovery decisions do **not** belong here. During
+`PROJECT_PHASE=discovery`, current product requirements live in
+[`../PRODUCT.md`](../PRODUCT.md), domain rules in [`../DOMAIN.md`](../DOMAIN.md),
+and discovery discussion/provenance in the approved product-discovery issue.
+ADRs are reserved for foundation, architecture, implementation, security,
+testing, process, and other durable technical trade-offs when the relevant
+lifecycle stage permits them.
 
 ## Rules
 
@@ -15,8 +23,9 @@ re-litigating it. Procedure:
 ## Index
 
 The records below are the **foundation** decisions, inherited from App-Factory.
-They explain how this repository is engineered, not what it builds. A generated
-repository appends its own product and stack decisions after them.
+They explain how this repository is engineered, not what App1 is. This
+instantiated repository appends later technical/architecture decisions after
+them; product-discovery requirements remain in the canonical product docs.
 
 | ADR | Title | Status | Date |
 | :-- | :-- | :-- | :-- |

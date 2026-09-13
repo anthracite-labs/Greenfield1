@@ -39,8 +39,11 @@ expensive at review time.
 5. **Decide: adopt / extend / build.** Adopt a maintained solution when it
    fits; wrap it when it nearly fits; build only when nothing does — and record
    the reasoning either way.
-6. **Write it down.** Findings that matter go into `docs/MEMORY.md`; durable
-   choices become ADRs (`decisions.md`).
+6. **Write it down in the right place.** Session findings that matter go into
+   `docs/MEMORY.md`. Founder-approved product-discovery conclusions go into the
+   canonical product/domain docs and their issue provenance. Durable technical
+   or architectural choices become ADRs (`decisions.md`) when the lifecycle
+   permits them.
 
 ## Arena specifics
 

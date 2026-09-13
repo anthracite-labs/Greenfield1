@@ -1,13 +1,15 @@
 # Security Policy
 
-This repository is an engineering foundation. It contains no application, no
-user data, and no deployed service. Its real attack surface is **an AI agent
-that reads and executes repository content**, plus the CI that runs on every
-pull request. This policy covers exactly that, and travels unchanged into every
-repository generated from it.
+Greenfield1 is an instantiated App1 repository currently in
+`PROJECT_PHASE=discovery`. It has no application source code, production user
+data, deployed App1 service, or approved application stack yet. Its current
+executable attack surface is the **repository engineering system**: an AI agent
+that reads and acts on repository content, plus the CI that runs on every pull
+request.
 
-A repository that later gains an application stack must extend this policy with
-the threats of that stack; it must not replace what is here.
+The inherited App-Factory security controls below remain the engineering-layer
+baseline. When this repository later gains an application stack, extend this
+policy with that stack's threats; do not replace the foundation controls.
 
 ## Threat model
 
@@ -19,7 +21,7 @@ the threats of that stack; it must not replace what is here.
 | CI runner | Workflow that executes untrusted input, or needs excess scope | Minimal permissions; no secrets required by the verify workflow |
 | Engineering system | A weakened check that silently passes | Checks fail closed; negative tests assert they can fail; weakening a gate requires justification in review |
 | Repository governance | Lifecycle guard disabled to slip in an unreviewed stack | `check_lifecycle` requires an accepted ADR and a matching phase; both directions are self-tested |
-| Platform configuration | A generated repository that is unprotected on GitHub | `docs/FACTORY.md` checklist; verification of `main` protection is a required human step |
+| Platform configuration | A repository that is unprotected on GitHub | `docs/FACTORY.md` checklist; verification of the active default-branch ruleset is required |
 
 ## Rules that are enforced automatically
 
@@ -103,13 +105,14 @@ npx -y ecc-agentshield@1.4.0 scan --format json
 The deep modes (`--injection`, `--sandbox`, `--taint`, `--deep`) actively
 execute or probe configuration and are never run automatically.
 
-**AgentShield is advisory in this foundation, not a security gate.** It targets
-Claude Code configuration surfaces (`.claude/`, hooks, MCP config), and an
-Arena adapter has none, so it scans zero files. `scripts/verify.sh` therefore
-reports it as `SKIP` rather than `PASS` whenever `filesScanned == 0` — a scan
-that examined nothing proves nothing, and reporting it as a pass would
-advertise coverage that does not exist. The credential controls that actually
-apply here are `check_secrets` and `check_env_files`, described above.
+**AgentShield is advisory in this repository's foundation layer, not a security
+gate.** It targets Claude Code configuration surfaces (`.claude/`, hooks, MCP
+config), and an Arena adapter has none, so it scans zero files.
+`scripts/verify.sh` therefore reports it as `SKIP` rather than `PASS` whenever
+`filesScanned == 0` — a scan that examined nothing proves nothing, and reporting
+it as a pass would advertise coverage that does not exist. The credential
+controls that actually apply here are `check_secrets` and `check_env_files`,
+described above.
 
 ## Reporting a security problem
 
@@ -127,11 +130,12 @@ then remove it. Deleting a line does not remove it from history.
 **Status:** discovery requirements, not implementation claims.  
 **Lifecycle:** `PROJECT_PHASE=discovery`.
 
-The foundation policy above remains in force unchanged. The requirements below
-come from current product discovery in [PRODUCT.md](PRODUCT.md) and constrain
-later architecture and validation. Specific cryptographic standards, protocols,
-identity providers, authorization systems, storage mechanisms, and deployment
-technologies remain architecture decisions.
+The engineering-layer foundation policy above remains in force. The
+requirements below come from current product discovery in
+[PRODUCT.md](PRODUCT.md) and constrain later architecture and validation.
+Specific cryptographic standards, protocols, identity providers, authorization
+systems, storage mechanisms, and deployment technologies remain architecture
+decisions.
 
 ### 1. Claims must be demonstrated before marketing
 

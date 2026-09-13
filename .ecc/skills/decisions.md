@@ -10,11 +10,19 @@ your reasoning.
 
 ## When to load
 
-- A real trade-off was chosen over at least one viable alternative.
-- A constraint was accepted ("we cannot do E2E in Arena, so…").
-- Someone will plausibly ask "why did we do X instead of Y?".
+- A real technical or architectural trade-off was chosen over at least one
+  viable alternative.
+- A technical constraint was accepted ("we cannot do E2E in Arena, so…").
+- Someone will plausibly ask "why did we choose this engineering approach?".
 - A foundation-level choice was made: tooling, layout, verification strategy,
   upstream pinning.
+
+During product discovery, do **not** use ADRs to record founder-approved product
+requirements, positioning, feature boundaries, personas, or validation goals.
+Those belong in the reviewed canonical product/domain docs and their approved
+discovery issue/provenance. Use ADRs for durable foundation, architecture,
+implementation, security, testing, process, and other technical trade-offs when
+the relevant lifecycle stage permits them.
 
 Do not write an ADR for reversible trivia, naming, or anything with no
 rejected alternative.
@@ -73,4 +81,5 @@ rejected alternative.
 ## Done when
 
 The ADR exists, is indexed, is linked from the PR, and a future reader can
-reconstruct *why* without asking anyone.
+reconstruct *why* the technical/architecture choice was made without asking
+anyone.

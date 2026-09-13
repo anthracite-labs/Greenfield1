@@ -13,8 +13,10 @@ Procedure: [`../.ecc/skills/project-memory.md`](../.ecc/skills/project-memory.md
   what was intended.
 - Record surprises and dead ends. A failed approach that is not written down
   gets retried by the next session.
-- Durable trade-offs go in [decisions/](decisions/README.md) as ADRs; this file
-  points at them rather than duplicating them.
+- Durable product-discovery decisions belong in reviewed canonical product/domain
+  docs and their approved issue provenance. Durable technical/architecture
+  trade-offs go in [decisions/](decisions/README.md) as ADRs; this file points
+  at the authoritative artifact rather than duplicating it.
 
 Entry template:
 
@@ -23,7 +25,7 @@ Entry template:
 
 **Context:** <issue / branch>
 **Did:** <what changed>
-**Verified:** <command → actual result>
+**Verified:** <command> → <actual result>
 **Learned:** <surprises, dead ends, constraints discovered>
 **Next:** <what the following session should know or do>
 ```
@@ -51,7 +53,7 @@ it has read anything else.
 | Read `.ecc/BOOTSTRAP.md` first; load 1–2 skills on demand. | `bootstrap`, `skill_index` checks |
 | `scripts/verify.sh` is the only accepted evidence of quality. | CI job `Foundation gate` |
 | The gate is proven by negative tests, not by passing. | `scripts/selftest.sh` |
-| No stack/product choice without an approved issue and an ADR. | `no_app_stack`, `lifecycle` checks |
+| Product discovery belongs in canonical product/domain docs; implementation-stack choices require an approved architecture issue, accepted ADR, and lifecycle transition. | `.ecc/BOOTSTRAP.md`, `no_app_stack`, `lifecycle` checks |
 | Lifecycle changes are config diffs, never edits to the gate. | `config/project.env` + `lifecycle` check |
 | Never commit credentials; findings are reported redacted. | `secrets`, `env_files` checks |
 | Work on the session branch; never push to `main`; never self-merge. | `.ecc/rules/git.md`, branch ruleset |
@@ -162,3 +164,29 @@ application-stack decisions belong in ADRs during the later lifecycle.
 `docs/PRODUCT.md` as the canonical discovery source, Issue #1 as provenance, and
 the Research → Planning workflow. Do not advance to architecture until the
 remaining discovery and validation exit conditions are explicitly satisfied.
+
+## 2026-09-13 — Live ruleset and stale-data audit
+
+**Context:** Issue #8, branch `docs/issue-8-ruleset-stale-audit`.
+**Did:** Verified the active `main-protection` repository ruleset, synchronized
+`config/main-ruleset.json` with its reusable pull-request fields, and corrected
+current-state wording that still treated discovery as product-undefined or
+routed product decisions into ADRs. Added a canonical-source note to Issue #1
+without rewriting its historical discovery content.
+**Verified:** GitHub reported `main` as the default branch and an active
+repository ruleset targeting `~DEFAULT_BRANCH` with deletion and non-fast-forward
+protection, pull-request enforcement, review-thread resolution, and strict
+required status checks `Foundation gate` and `Independent checks`. The live
+ruleset also reports `required_reviewers=[]` and
+`require_extra_approval_for_unattributed_changes=true`; those fields are now
+explicit in the portable JSON. Lifecycle values remain
+`PROJECT_PHASE=discovery`, `ALLOW_APP_STACK=0`, `STACK_DECISION_ADR=`.
+**Learned:** Stale data was concentrated at boundaries between inherited factory
+guidance and the now-populated discovery docs: `config/project.env` comments,
+architecture/security identity text, ADR/memory/research routing, the PR
+checklist, and factory ruleset documentation. Historical memory and superseded
+Issue #1 discussion should remain preserved but clearly non-canonical. Upstream
+ECC v2.2.1 and AgentShield v1.6.0 are now newer than the intentionally pinned
+v2.2.0 / v1.4.0; upgrading either remains separate reviewed work.
+**Next:** Verify the Issue #8 branch with the repository gate and exact-head CI,
+then merge the cleanup before resuming Hybrid / Professional Workspace research.
