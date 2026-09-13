@@ -1,9 +1,10 @@
 # Architecture
 
-**Scope: the engineering system.** There is no application architecture here,
-because App-Factory contains no application (see [PRODUCT.md](PRODUCT.md)). A
-repository generated from this template records its own application
-architecture in this file once an ADR selects a stack.
+**Scope: the engineering system.** Greenfield1 currently has no application
+architecture because `PROJECT_PHASE=discovery`. Application architecture belongs
+to the later architecture phase, after discovery is accepted enough to choose
+implementation approaches. Until then, this file documents the inherited
+engineering foundation and lifecycle boundaries rather than an App1 stack.
 
 ## Operating model
 
@@ -64,10 +65,10 @@ branch → tests → PR → CI → ChatGPT review → merge
 | `.ecc/VERSION`, `.ecc/UPSTREAM.md` | Upstream ECC provenance and licence record | Vendor upstream code |
 | `config/project.env` | Committed lifecycle state (phase, stack guard) | Hold secrets or be sourced by a shell |
 | `config/main-ruleset.json` | Portable branch-protection intent | Apply itself; contain instance ids |
-| `docs/MEMORY.md` | Durable cross-session memory | Replace ADRs or PR descriptions |
-| `docs/decisions/` | Durable trade-off records | Track task state |
+| `docs/MEMORY.md` | Durable cross-session memory | Replace canonical product docs, ADRs, or PR descriptions |
+| `docs/decisions/` | Durable technical/architecture trade-off records | Store product-discovery requirements or task state |
 | `docs/FACTORY.md` | Instantiation and admin checklist | Automate GitHub administration |
-| `scripts/verify.sh` | Deterministic quality gate | Test application behaviour (none exists) |
+| `scripts/verify.sh` | Deterministic quality gate | Test future application behaviour; stack-specific checks are added later |
 | `scripts/selftest.sh` | Negative tests that prove the gate can fail | Modify the real working tree |
 | `scripts/init-project.sh` | One-time, non-destructive project identity setup | Commit, push, or change GitHub settings |
 | `scripts/bootstrap.sh` | Session briefing from repository state | Mutate anything |
@@ -122,8 +123,9 @@ every rejection path, are covered by negative tests in
    workflows, 4 rules, and 3 personas, and never claims to be native ECC.
 6. **State, not surgery.** Lifecycle changes are config diffs reviewed in a PR,
    never edits to the script that enforces them.
-7. **No product assumptions.** The template chooses no framework, database,
-   auth scheme, or hosting target for anyone.
+7. **No implementation-stack assumptions.** Product discovery may define App1
+   requirements, but the foundation chooses no framework, database, auth
+   scheme, hosting target, or UI stack before the lifecycle permits it.
 
 ## Execution environment
 
@@ -133,8 +135,9 @@ re-checked rather than inherited as guarantees.
 
 ## Related
 
+- [PRODUCT.md](PRODUCT.md) — canonical App1 product discovery
 - [ROADMAP.md](ROADMAP.md) — lifecycle stages
 - [FACTORY.md](FACTORY.md) — instantiating a new application repository
 - [SECURITY.md](SECURITY.md) — repository security policy
-- [decisions/](decisions/README.md) — decision record index
+- [decisions/](decisions/README.md) — technical/architecture decision record index
 - [../.ecc/UPSTREAM.md](../.ecc/UPSTREAM.md) — ECC provenance and omissions
